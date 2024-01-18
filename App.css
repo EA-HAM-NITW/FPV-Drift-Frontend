@@ -1,0 +1,24 @@
+
+body, html {
+  height: 100vh; 
+  width: 210vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.outer {
+  text-align: center; 
+  height: 100vh; 
+  width: 100vw; 
+  background-image: url('images_auto_x2.jpg'); /* Replace with the actual path to your image */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.upper {
+  color: #f5ff00;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
