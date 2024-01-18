@@ -7,6 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useState } from "react";
 import { useEffect } from "react";
 import Leaderboard from "./componenets/Leaderboard";
+import xurl from "./assets/fpv_temp.jpg";
 
 function App() {
   const { leaderBoard, change } = useWS();
@@ -19,7 +20,12 @@ function App() {
   }, []);
   return (
     <>
-      <div>
+    <div className="banner">
+      <h1 style={{ fontSize:'75px'}}>Leaderboard</h1>
+    </div>
+    
+      <div style={{ display: "flex", justifyContent: "center"}}>
+        
         {admin && (
           <div
             style={{
@@ -30,6 +36,7 @@ function App() {
               padding: "10px",
             }}
           >
+            
             <IconButton
               onClick={() =>
                 change({ action: "add", name: leaderBoard.length + 1 })
