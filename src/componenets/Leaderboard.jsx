@@ -1,55 +1,69 @@
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownon from "@mui/icons-material/KeyboardArrowDown";
 import IconButton from "@mui/material/IconButton";
+import { motion, AnimatePresence } from "framer-motion";
+import "./Leaderboard.css";
 
 export default function Leaderboard({ leaderBoard, admin, change }) {
-  return leaderBoard.map((x) => (
+	// bronze color rgb 205,127,50
+  return (
     <div
-      key={x.name}
       style={{
+        width: "75vw",
         display: "flex",
-        justifyContent: "center",
+        flexDirection: "column",
         alignItems: "center",
-        backgroundColor: "rgba(0,0,0,0.1)",
-        padding: "10px",
-        borderRadius: "5px",
-        margin: "1em",
-        width: "20vw",
+        justifyContent: "center",
       }}
     >
-      <p>{x.name}</p>
-      {admin && (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifySelf: "flex-end",
-            marginLeft: "5vw",
-          }}
-        >
-          <IconButton
-            onClick={() => change({ action: "move", name: x.name, dir: "up" })}
+      <AnimatePresence>
+        {leaderBoard.map((x, i) => (
+          <motion.div
+            layout
+            layoutId={x.name}
+            key={x.name}
+            className={`leaderBoardItem ${i == 0 ? "leaderBoardFirst" : i == 1 ? "leaderBoardSecond" : i == 2 ? "leaderBoardThird" : ""}`}
           >
-            <KeyboardArrowUpIcon
-              style={{
-                fill: "white",
-              }}
-            />
-          </IconButton>
-          <IconButton
-            onClick={() =>
-              change({ action: "move", name: x.name, dir: "down" })
-            }
-          >
-            <KeyboardArrowDownon
-              style={{
-                fill: "white",
-              }}
-            />
-          </IconButton>
-        </div>
-      )}
+            <p>{x.name}</p>
+            {admin && (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifySelf: "flex-end",
+                  marginLeft: "5vw",
+                }}
+              >
+                <IconButton
+                  disabled={i === 0}
+                  onClick={() =>
+                    change({ action: "move", name: x.name, dir: "up" })
+                  }
+                >
+                  <KeyboardArrowUpIcon
+                    style={{
+                      fill: i === 0 ? "grey" : "white",
+                    }}
+                  />
+                </IconButton>
+                <IconButton
+                  disabled={i === 5}
+                  onClick={() =>
+                    change({ action: "move", name: x.name, dir: "down" })
+                  }
+                >
+                  <KeyboardArrowDownon
+                    style={{
+                      fill: i === 6 ? "grey" : "white",
+                    }}
+                  />
+                </IconButton>
+              </div>
+            )}
+          </motion.div>
+        ))}
+      </AnimatePresence>
     </div>
-  ));
+  );
 }
