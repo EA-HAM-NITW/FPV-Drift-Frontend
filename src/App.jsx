@@ -7,7 +7,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useState } from "react";
 import { useEffect } from "react";
 import Leaderboard from "./componenets/Leaderboard";
-import xurl from "./assets/fpv_temp.jpg";
 
 function App() {
   const { leaderBoard, change } = useWS();
