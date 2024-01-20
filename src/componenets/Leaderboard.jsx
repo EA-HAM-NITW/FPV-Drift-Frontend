@@ -70,7 +70,7 @@ export default function Leaderboard({ leaderBoard, admin, change }) {
                   onClick={() =>
                     change({ action: "move", name: x.name, dir: "down" })
                   }
-                >
+                > <button>+</button>
                   <KeyboardArrowDownon
                     style={{
                       fill: i === leaderBoard.length - 1 ? "grey" : "white",
