@@ -1,8 +1,11 @@
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownon from "@mui/icons-material/KeyboardArrowDown";
 import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+
 import { motion, AnimatePresence } from "framer-motion";
 import "./Leaderboard.css";
+import { PlusOneRounded } from "@mui/icons-material";
 
 export default function Leaderboard({ leaderBoard, admin, change }) {
   // bronze color rgb 205,127,50
@@ -42,7 +45,7 @@ export default function Leaderboard({ leaderBoard, admin, change }) {
               }}
             ></div>
             <p>{x.name}</p>
-
+            <Typography marginLeft={"2em"}>{x.lap}</Typography>
             {admin && (
               <div
                 style={{
@@ -70,10 +73,21 @@ export default function Leaderboard({ leaderBoard, admin, change }) {
                   onClick={() =>
                     change({ action: "move", name: x.name, dir: "down" })
                   }
-                > <button>+</button>
+                >
                   <KeyboardArrowDownon
                     style={{
                       fill: i === leaderBoard.length - 1 ? "grey" : "white",
+                    }}
+                  />
+                </IconButton>
+                <IconButton
+                  onClick={() => {
+                    change({ action: "lap", name: x.name });
+                  }}
+                >
+                  <PlusOneRounded
+                    style={{
+                      fill: "white",
                     }}
                   />
                 </IconButton>

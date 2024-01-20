@@ -19,7 +19,7 @@ const WebSocketProvider = ({ url, children }) => {
   }, [lastMessage]);
 
   function change({ action, name, dir, colour }) {
-    const constLeaderBoard = [...leaderBoard] ;
+    const constLeaderBoard = [...leaderBoard];
     if (action === "move") {
       const index = constLeaderBoard.findIndex((item) => item.name === name);
       // swap the item position based on dir
@@ -35,7 +35,7 @@ const WebSocketProvider = ({ url, children }) => {
       );
     } else if (action === "add") {
       console.log(name);
-      constLeaderBoard.push({ name, colour });
+      constLeaderBoard.push({ name, colour, lap: 0 });
       sendMessage(
         JSON.stringify({ action: "update", leaderBoard: constLeaderBoard })
       );
@@ -44,6 +44,14 @@ const WebSocketProvider = ({ url, children }) => {
     } else if (action === "delete") {
       setLeaderBoard([]);
       sendMessage(JSON.stringify({ action: "update", leaderBoard: [] }));
+    } else if (action == "lap") {
+      const index = constLeaderBoard.findIndex((item) => item.name === name);
+      constLeaderBoard[index].lap += 1;
+      console.log(constLeaderBoard);
+      setLeaderBoard(constLeaderBoard);
+      sendMessage(
+        JSON.stringify({ action: "update", leaderBoard: constLeaderBoard })
+      );
     }
   }
   return (
