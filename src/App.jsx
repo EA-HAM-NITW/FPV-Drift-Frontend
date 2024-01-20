@@ -8,9 +8,16 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Leaderboard from "./componenets/Leaderboard";
 
+import AdminModal from "./componenets/AdminModal";
+
+
 function App() {
   const { leaderBoard, change } = useWS();
   const [admin, setAdmin] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   useEffect(() => {
     console.log(window.location.hash);
     if (window.location.hash == "#admin") {
@@ -19,12 +26,18 @@ function App() {
   }, []);
   return (
     <>
-    <div className="banner">
-      <h1 style={{ fontSize:'75px'}}>Leaderboard</h1>
-    </div>
-    
-      <div style={{ display: "flex", justifyContent: "center"}}>
-        
+      <div className="banner">
+        <h1 style={{ fontSize: "75px" }}>Leaderboard</h1>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         {admin && (
           <div
             style={{
@@ -35,10 +48,10 @@ function App() {
               padding: "10px",
             }}
           >
-            
             <IconButton
-              onClick={() =>
-                change({ action: "add", name: leaderBoard.length + 1 })
+              onClick={
+                //() =>change({ action: "add", name: leaderBoard.length + 1 })
+                handleOpen
               }
             >
               <AddIcon
@@ -58,6 +71,12 @@ function App() {
         )}
         <Leaderboard admin={admin} leaderBoard={leaderBoard} change={change} />
       </div>
+      <AdminModal
+        open={open}
+        handleClose={handleClose}
+        change={change}
+        leaderBoard={leaderBoard}
+      />
     </>
   );
 }
